@@ -226,32 +226,30 @@ body::before { content: ''; position: fixed; inset: 0; background: radial-gradie
 }
 @media (max-height: 500px) and (orientation: landscape) {
   .scoreboard-hud {
-    top: 10px;
-    right: 8px;
+    top: 8px;
+    right: 6px;
     left: auto;
     bottom: auto;
-    width: 24%;
+    width: 17%;
     min-width: 0;
-    max-width: 198px;
-    border-radius: 8px;
+    max-width: 138px;
+    border-radius: 7px;
   }
-  .score-header { padding: 2px 0; }
-  .score-header .col-name { padding-right: 5px; padding-left: 0; }
-  .score-header .col-label { width: 18px; font-size: 4px; letter-spacing: 0; }
-  .score-header .col-label.set-history-label { width: 14px; font-size: 3px; display: block; }
-  .team-name { font-size: 7px; letter-spacing: 0.2px; }
+  .score-header { padding: 1px 0; }
+  .score-header .col-name { padding-right: 4px; padding-left: 0; }
+  .score-header .col-label { width: 14px; font-size: 3px; letter-spacing: 0; }
+  .score-header .col-label.set-history-label { display: none; }
+  .team-name { font-size: 6px; letter-spacing: 0.1px; }
   .player-names { display: none; }
-  .serve-cell { width: 10px; }
-  .serve-indicator { width: 5px; height: 5px; }
-  .team-row { padding: 3px 0; }
-  .name-cell { padding-left: 3px; padding-right: 0; gap: 0; }
-  .set-history-cell { width: 14px; display: flex; }
-  .set-history-cell .set-score { font-size: 8px; }
-  .set-history-cell .set-score .tb-sup { font-size: 5px; right: -5px; }
-  .score-cell { width: 18px; }
-  .score-cell.sets-cell .val { font-size: 7px; }
+  .serve-cell { width: 8px; }
+  .serve-indicator { width: 4px; height: 4px; }
+  .team-row { padding: 2px 0; }
+  .name-cell { padding-left: 2px; padding-right: 0; gap: 0; }
+  .set-history-cell { display: none; }
+  .score-cell { width: 14px; }
+  .score-cell.sets-cell .val { font-size: 6px; }
   .score-cell.games-cell .val,
-  .score-cell.pts-cell .val { font-size: 8px; }
+  .score-cell.pts-cell .val { font-size: 7px; }
 }
 @media (min-width: 1800px) {
   .team-name { font-size: 18px; }
