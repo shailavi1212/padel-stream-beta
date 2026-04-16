@@ -221,7 +221,7 @@ body::before { content: ''; position: fixed; inset: 0; background: radial-gradie
   .sponsor-slot { width: 80px; height: 28px; }
   .video-wrapper { border-radius: 0 0 14px 14px; }
   .fullscreen-toggle { right: 8px; bottom: 8px; padding: 7px 10px; font-size: 8px; letter-spacing: 0.4px; }
-  .scoreboard-hud { top: 8px; right: 8px; left: auto; bottom: auto; width: 42%; min-width: 0; max-width: 170px; border-radius: 8px; }
+  .scoreboard-hud { top: 8px; right: 8px; left: auto; bottom: auto; width: 21%; min-width: 0; max-width: 85px; border-radius: 8px; }
   .score-header { padding: 2px 0; }
   .score-header .col-name { padding-right: 5px; padding-left: 0; }
   .score-header .col-label { width: 22px; font-size: 5px; letter-spacing: 0; }
@@ -230,9 +230,13 @@ body::before { content: ''; position: fixed; inset: 0; background: radial-gradie
   .team-row { padding: 4px 0; }
   .name-cell { padding-left: 4px; padding-right: 0; gap: 0; }
   .standings-table td:nth-child(2) { max-width: 80px; font-size: 10px; }
+  .video-wrapper:fullscreen .scoreboard-hud,
+  .video-wrapper:-webkit-full-screen .scoreboard-hud { width: 42%; max-width: 170px; }
 }
 @media (max-width: 480px) and (orientation: portrait) {
-  .scoreboard-hud { width: 44%; max-width: 180px; }
+  .scoreboard-hud { width: 22%; max-width: 90px; }
+  .video-wrapper:fullscreen .scoreboard-hud,
+  .video-wrapper:-webkit-full-screen .scoreboard-hud { width: 44%; max-width: 180px; }
 }
 @media (orientation: landscape) and (pointer: coarse) and (max-height: 500px) {
   .scoreboard-hud {
