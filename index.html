@@ -49,8 +49,8 @@ body::before { content: ''; position: fixed; inset: 0; background: radial-gradie
 .video-wrapper { position: relative; width: 100%; aspect-ratio: 16/9; background: #000; border-left: 1px solid rgba(59,159,231,0.08); border-right: 1px solid rgba(59,159,231,0.08); border-bottom: 1px solid rgba(59,159,231,0.08); border-radius: 0 0 22px 22px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,0.35); isolation: isolate; }
 .video-wrapper::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(4,10,18,0.32) 0%, rgba(4,10,18,0.02) 28%, rgba(4,10,18,0.06) 55%, rgba(4,10,18,0.42) 100%); z-index: 1; pointer-events: none; }
 .video-wrapper iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; z-index: 0; }
-.fullscreen-toggle { position: absolute; left: 18px; bottom: 18px; z-index: 5; border: 1px solid rgba(91,184,255,0.2); background: rgba(8,20,34,0.58); color: var(--text-bright); font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 1.8px; text-transform: uppercase; padding: 10px 14px; border-radius: 999px; cursor: pointer; backdrop-filter: blur(14px); transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease; }
-.fullscreen-toggle:hover { background: rgba(8,20,34,0.76); border-color: rgba(91,184,255,0.35); transform: translateY(-1px); }
+.fullscreen-toggle { position: absolute; right: 18px; bottom: 18px; z-index: 5; border: 1px solid rgba(91,184,255,0.38); background: rgba(7,18,31,0.84); color: var(--text-bright); font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 800; letter-spacing: 1px; padding: 11px 16px; border-radius: 999px; cursor: pointer; backdrop-filter: blur(14px); box-shadow: 0 10px 24px rgba(0,0,0,0.28); transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease; }
+.fullscreen-toggle:hover { background: rgba(10,24,40,0.96); border-color: rgba(91,184,255,0.65); box-shadow: 0 14px 30px rgba(0,0,0,0.34); transform: translateY(-1px); }
 .video-wrapper:fullscreen,
 .video-wrapper:-webkit-full-screen {
   width: 100vw;
@@ -63,7 +63,7 @@ body::before { content: ''; position: fixed; inset: 0; background: radial-gradie
 .video-wrapper:fullscreen .fullscreen-toggle,
 .video-wrapper:-webkit-full-screen .fullscreen-toggle {
   bottom: 24px;
-  left: 24px;
+  right: 24px;
 }
 .video-placeholder { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; background: radial-gradient(ellipse at center, rgba(59,159,231,0.03) 0%, transparent 70%), var(--bg-deep); z-index: 0; }
 .video-placeholder .icon { width: 80px; height: 80px; border: 2px solid rgba(212,168,67,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; animation: pulseGlow 2.5s ease-in-out infinite; }
@@ -185,7 +185,7 @@ body::before { content: ''; position: fixed; inset: 0; background: radial-gradie
   .sponsor-bar .label { display: none; }
   .sponsor-slot { width: 100px; height: 34px; }
   .video-wrapper { border-radius: 0 0 16px 16px; }
-  .fullscreen-toggle { left: 12px; bottom: 12px; padding: 8px 12px; font-size: 9px; letter-spacing: 1.4px; }
+  .fullscreen-toggle { right: 12px; bottom: 12px; padding: 8px 12px; font-size: 9px; letter-spacing: 0.8px; }
   .team-name { font-size: 12px; letter-spacing: 1px; }
   .player-names { font-size: 8px; }
   .score-cell { width: 38px; }
@@ -220,7 +220,7 @@ body::before { content: ''; position: fixed; inset: 0; background: radial-gradie
   .score-cell.pts-cell .val { font-size: 11px; }
   .sponsor-slot { width: 80px; height: 28px; }
   .video-wrapper { border-radius: 0 0 14px 14px; }
-  .fullscreen-toggle { left: 8px; bottom: 8px; padding: 6px 10px; font-size: 8px; letter-spacing: 1px; }
+  .fullscreen-toggle { right: 8px; bottom: 8px; padding: 7px 10px; font-size: 8px; letter-spacing: 0.4px; }
   .scoreboard-hud { top: 8px; right: 8px; left: auto; bottom: auto; width: 42%; min-width: 0; max-width: 170px; border-radius: 8px; }
   .score-header { padding: 2px 0; }
   .score-header .col-name { padding-right: 5px; padding-left: 0; }
@@ -289,7 +289,7 @@ body::before { content: ''; position: fixed; inset: 0; background: radial-gradie
       <div class="sponsor-slot" id="sponsor3"><span class="empty-sponsor">Sponsor</span></div>
     </div>
     <div class="video-wrapper" id="videoWrapper">
-      <button class="fullscreen-toggle" id="fullscreenToggle" type="button">Fullscreen</button>
+      <button class="fullscreen-toggle" id="fullscreenToggle" type="button">מסך מלא</button>
       <div class="video-placeholder" id="videoPlaceholder">
         <div class="icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         <div class="text">Waiting for stream...</div>
@@ -486,7 +486,7 @@ function getFullscreenElement() {
 }
 function updateFullscreenButton() {
   if (!fullscreenToggle) return;
-  fullscreenToggle.textContent = getFullscreenElement() === fullscreenTarget ? 'Exit Fullscreen' : 'Fullscreen';
+  fullscreenToggle.textContent = getFullscreenElement() === fullscreenTarget ? 'צא ממסך מלא' : 'מסך מלא';
 }
 function toggleFullscreen() {
   if (!fullscreenTarget) return;
