@@ -211,6 +211,30 @@ body::before { content: ''; position: fixed; inset: 0; background: radial-gradie
   .score-cell.pts-cell .val { font-size: 6px; }
   .score-header .col-label { width: 12px; font-size: 2px; }
 }
+@media (max-height: 500px) and (orientation: landscape) {
+  .scoreboard-hud {
+    top: 6px;
+    right: 6px;
+    left: auto;
+    bottom: auto;
+    width: 12%;
+    min-width: 0;
+    max-width: 92px;
+    border-radius: 6px;
+  }
+  .score-header { padding: 1px 0; }
+  .score-header .col-name { padding-left: 3px; }
+  .score-header .col-label { width: 16px; font-size: 3px; letter-spacing: 0; }
+  .team-name { font-size: 6px; letter-spacing: 0.2px; }
+  .player-names { display: none; }
+  .serve-cell { width: 8px; }
+  .serve-indicator { width: 4px; height: 4px; }
+  .team-row { padding: 2px 0; }
+  .name-cell { padding-right: 2px; gap: 0; }
+  .score-cell { width: 16px; }
+  .score-cell.games-cell .val,
+  .score-cell.pts-cell .val { font-size: 7px; }
+}
 @media (min-width: 1800px) {
   .team-name { font-size: 18px; }
   .score-cell { width: 64px; }
