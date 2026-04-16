@@ -55,7 +55,7 @@ body::before { content: ''; position: fixed; inset: 0; background: radial-gradie
 .video-placeholder .text { font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 5px; color: var(--text-secondary); text-transform: uppercase; }
 @keyframes pulseGlow { 0%, 100% { box-shadow: 0 0 20px rgba(212,168,67,0.08); } 50% { box-shadow: 0 0 40px rgba(212,168,67,0.18); } }
 
-.scoreboard-hud { position: absolute; top: 18px; right: 18px; left: auto; bottom: auto; width: 39%; min-width: 480px; max-width: 645px; display: flex; flex-direction: column; background: linear-gradient(180deg, rgba(8,20,34,0.32), rgba(5,14,24,0.46)); border: 1px solid rgba(91,184,255,0.12); border-radius: 14px; overflow: hidden; backdrop-filter: blur(14px); z-index: 4; box-shadow: 0 10px 26px rgba(0,0,0,0.2); }
+.scoreboard-hud { position: absolute; top: 18px; right: 18px; left: auto; bottom: auto; width: 28%; min-width: 340px; max-width: 460px; display: flex; flex-direction: column; background: linear-gradient(180deg, rgba(8,20,34,0.32), rgba(5,14,24,0.46)); border: 1px solid rgba(91,184,255,0.12); border-radius: 14px; overflow: hidden; backdrop-filter: blur(14px); z-index: 4; box-shadow: 0 10px 26px rgba(0,0,0,0.2); }
 .scoreboard-hud::before { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent 5%, var(--gold) 35%, var(--electric-blue) 65%, transparent 95%); opacity: 0.6; }
 .score-header { display: flex; align-items: center; padding: 6px 0; border-bottom: 1px solid rgba(59,159,231,0.05); background: linear-gradient(90deg, rgba(255,255,255,0.015), rgba(255,255,255,0.005)); }
 .score-header .col-name { flex: 1; padding-right: 14px; padding-left: 0; text-align: right; order: 5; }
@@ -179,7 +179,7 @@ body::before { content: ''; position: fixed; inset: 0; background: radial-gradie
   .score-header .col-label.set-history-label { width: 22px; font-size: 6px; }
   .score-header .col-name { padding-right: 10px; padding-left: 0; }
   .serve-cell { width: 18px; }
-  .scoreboard-hud { top: 12px; right: 12px; left: auto; bottom: auto; width: 45%; min-width: 360px; max-width: 420px; border-radius: 12px; }
+  .scoreboard-hud { top: 12px; right: 12px; left: auto; bottom: auto; width: 34%; min-width: 280px; max-width: 340px; border-radius: 12px; }
   .set-history-cell { width: 22px; }
   .set-history-cell .set-score { font-size: 11px; }
   .page-title { font-size: 24px; }
@@ -224,32 +224,32 @@ body::before { content: ''; position: fixed; inset: 0; background: radial-gradie
   .score-cell.pts-cell .val { font-size: 6px; }
   .score-header .col-label { width: 12px; font-size: 2px; }
 }
-@media (max-height: 500px) and (orientation: landscape) {
+@media (max-width: 950px) and (max-height: 500px) and (orientation: landscape) {
   .scoreboard-hud {
     top: 8px;
     right: 6px;
     left: auto;
     bottom: auto;
-    width: 17% !important;
+    width: 14% !important;
     min-width: 0;
-    max-width: 138px !important;
+    max-width: 110px !important;
     border-radius: 7px;
   }
   .score-header { padding: 1px 0; }
   .score-header .col-name { padding-right: 4px; padding-left: 0; }
-  .score-header .col-label { width: 14px; font-size: 3px; letter-spacing: 0; }
+  .score-header .col-label { width: 11px; font-size: 3px; letter-spacing: 0; }
   .score-header .col-label.set-history-label { display: none; }
-  .team-name { font-size: 6px; letter-spacing: 0.1px; }
+  .team-name { font-size: 5px; letter-spacing: 0; }
   .player-names { display: none; }
-  .serve-cell { width: 8px; }
-  .serve-indicator { width: 4px; height: 4px; }
+  .serve-cell { width: 6px; }
+  .serve-indicator { width: 3px; height: 3px; }
   .team-row { padding: 2px 0; }
   .name-cell { padding-left: 2px; padding-right: 0; gap: 0; }
   .set-history-cell { display: none; }
-  .score-cell { width: 14px; }
-  .score-cell.sets-cell .val { font-size: 6px; }
+  .score-cell { width: 11px; }
+  .score-cell.sets-cell .val { font-size: 5px; }
   .score-cell.games-cell .val,
-  .score-cell.pts-cell .val { font-size: 7px; }
+  .score-cell.pts-cell .val { font-size: 6px; }
 }
 @media (min-width: 1800px) {
   .team-name { font-size: 18px; }
