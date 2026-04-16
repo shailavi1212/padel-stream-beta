@@ -74,11 +74,12 @@ body::before { content: ''; position: fixed; inset: 0; background: radial-gradie
 .team-row:first-of-type .team-name { color: var(--electric-blue-bright); text-shadow: 0 0 24px rgba(59,159,231,0.2); }
 .team-row:last-of-type .team-name { color: var(--gold-light); text-shadow: 0 0 24px rgba(212,168,67,0.2); }
 .player-names { font-family: 'Inter', sans-serif; font-size: 9px; color: var(--text-secondary); letter-spacing: 0.2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.score-cell { width: 58px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; position: relative; }
+.score-cell { width: 44px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; position: relative; }
 .score-cell::before { content: ''; position: absolute; left: 0; top: 18%; bottom: 18%; width: 1px; background: rgba(59,159,231,0.04); }
 .score-cell .val { font-family: 'Bebas Neue', sans-serif; line-height: 1; transition: all 0.2s; }
 .score-cell .val.pulse { animation: scorePulse 0.5s ease-out; }
 @keyframes scorePulse { 0% { transform: scale(1); } 30% { transform: scale(1.25); color: var(--electric-blue-bright); text-shadow: 0 0 18px var(--electric-blue); } 100% { transform: scale(1); } }
+.score-cell.sets-cell .val { font-size: 16px; color: var(--electric-blue); }
 .score-cell.games-cell .val { font-size: 20px; color: var(--text-bright); }
 .score-cell.pts-cell { background: rgba(212,168,67,0.025); }
 .score-cell.pts-cell::before { background: rgba(212,168,67,0.06); }
@@ -165,10 +166,11 @@ body::before { content: ''; position: fixed; inset: 0; background: radial-gradie
   .video-wrapper { border-radius: 0 0 16px 16px; }
   .team-name { font-size: 12px; letter-spacing: 1px; }
   .player-names { font-size: 8px; }
-  .score-cell { width: 46px; }
+  .score-cell { width: 38px; }
+  .score-cell.sets-cell .val { font-size: 13px; }
   .score-cell.games-cell .val { font-size: 16px; }
   .score-cell.pts-cell .val { font-size: 16px; }
-  .score-header .col-label { width: 46px; font-size: 7px; }
+  .score-header .col-label { width: 38px; font-size: 7px; }
   .score-header .col-name { padding-left: 10px; }
   .serve-cell { width: 18px; }
   .scoreboard-hud { top: 12px; right: 12px; left: auto; bottom: auto; width: 30%; min-width: 240px; max-width: 280px; border-radius: 12px; }
@@ -185,15 +187,16 @@ body::before { content: ''; position: fixed; inset: 0; background: radial-gradie
   .sponsor-bar { gap: 8px; padding: 7px 10px; min-height: 42px; }
   .team-name { font-size: 6px; letter-spacing: 0.2px; }
   .player-names { display: none; }
-  .score-cell { width: 16px; }
+  .score-cell { width: 14px; }
+  .score-cell.sets-cell .val { font-size: 6px; }
   .score-cell.games-cell .val { font-size: 7px; }
   .score-cell.pts-cell .val { font-size: 7px; }
   .sponsor-slot { width: 80px; height: 28px; }
   .video-wrapper { border-radius: 0 0 14px 14px; }
-  .scoreboard-hud { top: 6px; right: 6px; left: auto; bottom: auto; width: 28%; min-width: 0; max-width: 88px; border-radius: 6px; }
+  .scoreboard-hud { top: 6px; right: 6px; left: auto; bottom: auto; width: 31%; min-width: 0; max-width: 96px; border-radius: 6px; }
   .score-header { padding: 1px 0; }
   .score-header .col-name { padding-left: 3px; }
-  .score-header .col-label { width: 16px; font-size: 3px; letter-spacing: 0; }
+  .score-header .col-label { width: 14px; font-size: 3px; letter-spacing: 0; }
   .serve-cell { width: 8px; }
   .serve-indicator { width: 4px; height: 4px; }
   .team-row { padding: 2px 0; }
@@ -213,27 +216,28 @@ body::before { content: ''; position: fixed; inset: 0; background: radial-gradie
 }
 @media (max-height: 500px) and (orientation: landscape) {
   .scoreboard-hud {
-    top: 6px;
-    right: 6px;
+    top: 10px;
+    right: 8px;
     left: auto;
     bottom: auto;
-    width: 12%;
+    width: 16%;
     min-width: 0;
-    max-width: 92px;
-    border-radius: 6px;
+    max-width: 132px;
+    border-radius: 8px;
   }
-  .score-header { padding: 1px 0; }
-  .score-header .col-name { padding-left: 3px; }
-  .score-header .col-label { width: 16px; font-size: 3px; letter-spacing: 0; }
-  .team-name { font-size: 6px; letter-spacing: 0.2px; }
+  .score-header { padding: 2px 0; }
+  .score-header .col-name { padding-left: 5px; }
+  .score-header .col-label { width: 18px; font-size: 4px; letter-spacing: 0; }
+  .team-name { font-size: 7px; letter-spacing: 0.2px; }
   .player-names { display: none; }
-  .serve-cell { width: 8px; }
-  .serve-indicator { width: 4px; height: 4px; }
-  .team-row { padding: 2px 0; }
-  .name-cell { padding-right: 2px; gap: 0; }
-  .score-cell { width: 16px; }
+  .serve-cell { width: 10px; }
+  .serve-indicator { width: 5px; height: 5px; }
+  .team-row { padding: 3px 0; }
+  .name-cell { padding-right: 3px; gap: 0; }
+  .score-cell { width: 18px; }
+  .score-cell.sets-cell .val { font-size: 7px; }
   .score-cell.games-cell .val,
-  .score-cell.pts-cell .val { font-size: 7px; }
+  .score-cell.pts-cell .val { font-size: 8px; }
 }
 @media (min-width: 1800px) {
   .team-name { font-size: 18px; }
@@ -270,10 +274,10 @@ body::before { content: ''; position: fixed; inset: 0; background: radial-gradie
       <div class="scoreboard-hud">
         <div class="score-header" id="scoreHeader">
           <div class="col-name"></div><div id="headerSetHistory" style="display:contents;"></div>
-          <div class="col-label">GAMES</div><div class="col-label pts-label">PTS</div>
+          <div class="col-label">SETS</div><div class="col-label">GAMES</div><div class="col-label pts-label">PTS</div>
         </div>
-        <div class="team-row" id="rowA"><div class="serve-cell"><div class="serve-indicator"></div></div><div class="name-cell"><div class="team-name" id="teamAName">TEAM A</div><div class="player-names" id="playersA">&mdash;</div></div><div id="setHistoryA" style="display:contents;"></div><div class="score-cell games-cell"><span class="val" id="scoreA">0</span></div><div class="score-cell pts-cell"><span class="val" id="pointsA">0</span></div></div>
-        <div class="team-row" id="rowB"><div class="serve-cell"><div class="serve-indicator"></div></div><div class="name-cell"><div class="team-name" id="teamBName">TEAM B</div><div class="player-names" id="playersB">&mdash;</div></div><div id="setHistoryB" style="display:contents;"></div><div class="score-cell games-cell"><span class="val" id="scoreB">0</span></div><div class="score-cell pts-cell"><span class="val" id="pointsB">0</span></div></div>
+        <div class="team-row" id="rowA"><div class="serve-cell"><div class="serve-indicator"></div></div><div class="name-cell"><div class="team-name" id="teamAName">TEAM A</div><div class="player-names" id="playersA">&mdash;</div></div><div id="setHistoryA" style="display:contents;"></div><div class="score-cell sets-cell"><span class="val" id="setsA">0</span></div><div class="score-cell games-cell"><span class="val" id="scoreA">0</span></div><div class="score-cell pts-cell"><span class="val" id="pointsA">0</span></div></div>
+        <div class="team-row" id="rowB"><div class="serve-cell"><div class="serve-indicator"></div></div><div class="name-cell"><div class="team-name" id="teamBName">TEAM B</div><div class="player-names" id="playersB">&mdash;</div></div><div id="setHistoryB" style="display:contents;"></div><div class="score-cell sets-cell"><span class="val" id="setsB">0</span></div><div class="score-cell games-cell"><span class="val" id="scoreB">0</span></div><div class="score-cell pts-cell"><span class="val" id="pointsB">0</span></div></div>
       </div>
     </div>
     <div class="broadcast-footer"><span>Padel Live Broadcast System</span></div>
@@ -482,6 +486,7 @@ function applyScoreData(d) {
   var sAEl=document.getElementById('scoreA'),sBEl=document.getElementById('scoreB'),nSA=d.scoreA||0,nSB=d.scoreB||0;
   if(prevScoreA!==null&&prevScoreA!==nSA)pulseScore(sAEl); if(prevScoreB!==null&&prevScoreB!==nSB)pulseScore(sBEl);
   sAEl.textContent=nSA; sBEl.textContent=nSB; prevScoreA=nSA; prevScoreB=nSB;
+  document.getElementById('setsA').textContent=d.setsA||0; document.getElementById('setsB').textContent=d.setsB||0;
   var tb=d.isTiebreak||false,pAEl=document.getElementById('pointsA'),pBEl=document.getElementById('pointsB'),nPA=getPD(d.pointsA||0,tb),nPB=getPD(d.pointsB||0,tb);
   if(prevPointsA!==null&&prevPointsA!==nPA)pulseScore(pAEl); if(prevPointsB!==null&&prevPointsB!==nPB)pulseScore(pBEl);
   pAEl.textContent=nPA; pBEl.textContent=nPB; prevPointsA=nPA; prevPointsB=nPB;
