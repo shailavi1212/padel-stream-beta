@@ -200,6 +200,17 @@ body::before { content: ''; position: fixed; inset: 0; background: radial-gradie
   .name-cell { padding-right: 2px; gap: 0; }
   .standings-table td:nth-child(2) { max-width: 80px; font-size: 10px; }
 }
+@media (max-width: 480px) and (orientation: portrait) {
+  .scoreboard-hud { width: 22.4%; max-width: 70px; }
+}
+@media (max-width: 480px) and (orientation: landscape) {
+  .scoreboard-hud { width: 14%; max-width: 44px; }
+  .team-name { font-size: 5px; }
+  .score-cell { width: 12px; }
+  .score-cell.games-cell .val,
+  .score-cell.pts-cell .val { font-size: 6px; }
+  .score-header .col-label { width: 12px; font-size: 2px; }
+}
 @media (min-width: 1800px) {
   .team-name { font-size: 18px; }
   .score-cell { width: 64px; }
