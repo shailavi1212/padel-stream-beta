@@ -210,37 +210,29 @@ body::before { content: ''; position: fixed; inset: 0; background: radial-gradie
 @media (max-width: 480px) {
   .nav-brand { display: none; }
   .sponsor-bar { gap: 8px; padding: 7px 10px; min-height: 42px; }
-  .team-name { font-size: 6px; letter-spacing: 0.2px; }
+  .team-name { font-size: 9px; letter-spacing: 0.2px; }
   .player-names { display: none; }
   .score-header .col-label.set-history-label { display: none; }
   .set-history-cell { display: none; }
-  .score-cell { width: 14px; }
-  .score-cell.sets-cell .val { font-size: 6px; }
-  .score-cell.games-cell .val { font-size: 7px; }
-  .score-cell.pts-cell .val { font-size: 7px; }
+  .score-cell { width: 22px; }
+  .score-cell.sets-cell .val { font-size: 10px; }
+  .score-cell.games-cell .val { font-size: 11px; }
+  .score-cell.pts-cell .val { font-size: 11px; }
   .sponsor-slot { width: 80px; height: 28px; }
   .video-wrapper { border-radius: 0 0 14px 14px; }
   .fullscreen-toggle { left: 8px; bottom: 8px; padding: 6px 10px; font-size: 8px; letter-spacing: 1px; }
-  .scoreboard-hud { top: 6px; right: 6px; left: auto; bottom: auto; width: 31%; min-width: 0; max-width: 96px; border-radius: 6px; }
-  .score-header { padding: 1px 0; }
-  .score-header .col-name { padding-right: 3px; padding-left: 0; }
-  .score-header .col-label { width: 14px; font-size: 3px; letter-spacing: 0; }
-  .serve-cell { width: 8px; }
-  .serve-indicator { width: 4px; height: 4px; }
-  .team-row { padding: 2px 0; }
-  .name-cell { padding-left: 2px; padding-right: 0; gap: 0; }
+  .scoreboard-hud { top: 8px; right: 8px; left: auto; bottom: auto; width: 42%; min-width: 0; max-width: 170px; border-radius: 8px; }
+  .score-header { padding: 2px 0; }
+  .score-header .col-name { padding-right: 5px; padding-left: 0; }
+  .score-header .col-label { width: 22px; font-size: 5px; letter-spacing: 0; }
+  .serve-cell { width: 10px; }
+  .serve-indicator { width: 5px; height: 5px; }
+  .team-row { padding: 4px 0; }
+  .name-cell { padding-left: 4px; padding-right: 0; gap: 0; }
   .standings-table td:nth-child(2) { max-width: 80px; font-size: 10px; }
 }
 @media (max-width: 480px) and (orientation: portrait) {
-  .scoreboard-hud { width: 22.4%; max-width: 70px; }
-}
-@media (max-width: 480px) and (orientation: landscape) {
-  .scoreboard-hud { width: 14%; max-width: 44px; }
-  .team-name { font-size: 5px; }
-  .score-cell { width: 12px; }
-  .score-cell.games-cell .val,
-  .score-cell.pts-cell .val { font-size: 6px; }
-  .score-header .col-label { width: 12px; font-size: 2px; }
+  .scoreboard-hud { width: 44%; max-width: 180px; }
 }
 @media (orientation: landscape) and (pointer: coarse) and (max-height: 500px) {
   .scoreboard-hud {
@@ -248,26 +240,26 @@ body::before { content: ''; position: fixed; inset: 0; background: radial-gradie
     right: 6px;
     left: auto;
     bottom: auto;
-    width: 12% !important;
+    width: 18% !important;
     min-width: 0;
-    max-width: 92px !important;
-    border-radius: 6px;
+    max-width: 150px !important;
+    border-radius: 8px;
   }
-  .score-header { padding: 0; }
-  .score-header .col-name { padding-right: 3px; padding-left: 0; }
-  .score-header .col-label { width: 9px; font-size: 2px; letter-spacing: 0; }
+  .score-header { padding: 1px 0; }
+  .score-header .col-name { padding-right: 4px; padding-left: 0; }
+  .score-header .col-label { width: 15px; font-size: 3px; letter-spacing: 0; }
   .score-header .col-label.set-history-label { display: none; }
-  .team-name { font-size: 4px; letter-spacing: 0; }
+  .team-name { font-size: 6px; letter-spacing: 0; }
   .player-names { display: none; }
-  .serve-cell { width: 5px; }
-  .serve-indicator { width: 3px; height: 3px; }
-  .team-row { padding: 1px 0; }
-  .name-cell { padding-left: 1px; padding-right: 0; gap: 0; }
+  .serve-cell { width: 8px; }
+  .serve-indicator { width: 4px; height: 4px; }
+  .team-row { padding: 2px 0; }
+  .name-cell { padding-left: 2px; padding-right: 0; gap: 0; }
   .set-history-cell { display: none; }
-  .score-cell { width: 9px; }
-  .score-cell.sets-cell .val { font-size: 4px; }
+  .score-cell { width: 15px; }
+  .score-cell.sets-cell .val { font-size: 6px; }
   .score-cell.games-cell .val,
-  .score-cell.pts-cell .val { font-size: 5px; }
+  .score-cell.pts-cell .val { font-size: 7px; }
 }
 @media (min-width: 1800px) {
   .team-name { font-size: 18px; }
