@@ -2,8 +2,15 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>BEER SHEVA PADEL LEAGUE</title>
+<meta name="theme-color" content="#070E18">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="BS Padel Live">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="sponsor2.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Bebas+Neue&display=swap" rel="stylesheet">
 <style>
@@ -567,6 +574,11 @@ document.addEventListener('webkitfullscreenchange', updateFullscreenButton);
 window.addEventListener('orientationchange', function() {
   if (isiOSDevice && isIOSVideoMode()) window.scrollTo(0, 0);
 });
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('./sw.js').catch(function() {});
+  });
+}
 updateFullscreenButton();
 function pulseScore(el){ el.classList.remove('pulse'); void el.offsetWidth; el.classList.add('pulse'); }
 function renderSetHistory(sh) {
