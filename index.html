@@ -459,17 +459,29 @@ scheduleRef.on('value', function(snap) {
 initSchedGroupTabs(); renderFixtureTabs(); renderCurrentFixture();
 
 /* ========== LIVE MATCH ========== */
-var prevScoreA = null, prevScoreB = null, currentStreamURL = '';
+var prevScoreA = null, prevScoreB = null, currentStreamURL = '', rawStreamURL = '';
+function getYouTubeVideoId(url) {
+  if (!url) return '';
+  var m = url.match(/youtu\.be\/([^?&]+)/);
+  if (m) return m[1];
+  m = url.match(/[?&]v=([^?&]+)/);
+  if (m) return m[1];
+  m = url.match(/youtube\.com\/embed\/([^?&]+)/);
+  if (m) return m[1];
+  m = url.match(/youtube\.com\/live\/([^?&]+)/);
+  if (m) return m[1];
+  return '';
+}
 function getYouTubeEmbedURL(url) {
   if (!url) return '';
   if (url.indexOf('/embed/') !== -1) return url;
-  var m = url.match(/youtu\.be\/([^?&]+)/);
-  if (m) return 'https://www.youtube.com/embed/' + m[1] + '?autoplay=1&mute=1';
-  m = url.match(/[?&]v=([^?&]+)/);
-  if (m) return 'https://www.youtube.com/embed/' + m[1] + '?autoplay=1&mute=1';
-  m = url.match(/youtube\.com\/live\/([^?&]+)/);
-  if (m) return 'https://www.youtube.com/embed/' + m[1] + '?autoplay=1&mute=1';
+  var videoId = getYouTubeVideoId(url);
+  if (videoId) return 'https://www.youtube.com/embed/' + videoId + '?autoplay=1&mute=1';
   return url;
+}
+function getYouTubeWatchURL(url) {
+  var videoId = getYouTubeVideoId(url);
+  return videoId ? 'https://www.youtube.com/watch?v=' + videoId : url;
 }
 function updateSponsor(id, url) {
   var el = document.getElementById(id);
@@ -477,6 +489,7 @@ function updateSponsor(id, url) {
   else el.innerHTML = '<span class="empty-sponsor">Sponsor</span>';
 }
 function updateStream(url) {
+  rawStreamURL = url || '';
   var eu = getYouTubeEmbedURL(url);
   if (eu === currentStreamURL) return; currentStreamURL = eu;
   var w = document.getElementById('videoWrapper'), p = document.getElementById('videoPlaceholder');
@@ -485,15 +498,25 @@ function updateStream(url) {
 }
 var fullscreenTarget = document.getElementById('videoWrapper');
 var fullscreenToggle = document.getElementById('fullscreenToggle');
+var isiOSDevice = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 function getFullscreenElement() {
   return document.fullscreenElement || document.webkitFullscreenElement || null;
 }
 function updateFullscreenButton() {
   if (!fullscreenToggle) return;
+  if (isiOSDevice) {
+    fullscreenToggle.textContent = 'פתח ביוטיוב';
+    return;
+  }
   fullscreenToggle.textContent = getFullscreenElement() === fullscreenTarget ? 'צא ממסך מלא' : 'מסך מלא';
 }
 function toggleFullscreen() {
   if (!fullscreenTarget) return;
+  if (isiOSDevice) {
+    var youtubeURL = getYouTubeWatchURL(rawStreamURL || currentStreamURL);
+    if (youtubeURL) window.open(youtubeURL, '_blank', 'noopener');
+    return;
+  }
   if (getFullscreenElement() === fullscreenTarget) {
     if (document.exitFullscreen) document.exitFullscreen();
     else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
