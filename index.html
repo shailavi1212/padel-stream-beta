@@ -65,6 +65,38 @@ body::before { content: ''; position: fixed; inset: 0; background: radial-gradie
   bottom: 24px;
   right: 24px;
 }
+body.ios-video-mode { overflow: hidden; }
+body.ios-video-mode .top-nav,
+body.ios-video-mode .sponsor-bar,
+body.ios-video-mode .broadcast-footer { display: none; }
+body.ios-video-mode #page-live {
+  max-width: none;
+  min-height: 100vh;
+  padding: 0;
+}
+body.ios-video-mode .broadcast-container {
+  min-height: 100vh;
+}
+body.ios-video-mode .video-wrapper {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  max-width: none;
+  aspect-ratio: auto;
+  border: none;
+  border-radius: 0;
+  z-index: 250;
+}
+body.ios-video-mode .video-wrapper .fullscreen-toggle {
+  right: calc(env(safe-area-inset-right, 0px) + 16px);
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 16px);
+}
+body.ios-video-mode .video-wrapper .scoreboard-hud {
+  top: calc(env(safe-area-inset-top, 0px) + 12px);
+  right: calc(env(safe-area-inset-right, 0px) + 12px);
+}
 .video-placeholder { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; background: radial-gradient(ellipse at center, rgba(59,159,231,0.03) 0%, transparent 70%), var(--bg-deep); z-index: 0; }
 .video-placeholder .icon { width: 80px; height: 80px; border: 2px solid rgba(212,168,67,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; animation: pulseGlow 2.5s ease-in-out infinite; }
 .video-placeholder .icon svg { width: 30px; height: 30px; fill: var(--gold); opacity: 0.5; margin-left: 4px; }
@@ -499,13 +531,16 @@ function updateStream(url) {
 var fullscreenTarget = document.getElementById('videoWrapper');
 var fullscreenToggle = document.getElementById('fullscreenToggle');
 var isiOSDevice = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+function isIOSVideoMode() {
+  return document.body.classList.contains('ios-video-mode');
+}
 function getFullscreenElement() {
   return document.fullscreenElement || document.webkitFullscreenElement || null;
 }
 function updateFullscreenButton() {
   if (!fullscreenToggle) return;
   if (isiOSDevice) {
-    fullscreenToggle.textContent = 'פתח ביוטיוב';
+    fullscreenToggle.textContent = isIOSVideoMode() ? 'צא ממסך מלא' : 'מסך מלא';
     return;
   }
   fullscreenToggle.textContent = getFullscreenElement() === fullscreenTarget ? 'צא ממסך מלא' : 'מסך מלא';
@@ -513,8 +548,9 @@ function updateFullscreenButton() {
 function toggleFullscreen() {
   if (!fullscreenTarget) return;
   if (isiOSDevice) {
-    var youtubeURL = getYouTubeWatchURL(rawStreamURL || currentStreamURL);
-    if (youtubeURL) window.open(youtubeURL, '_blank', 'noopener');
+    document.body.classList.toggle('ios-video-mode');
+    window.scrollTo(0, 0);
+    updateFullscreenButton();
     return;
   }
   if (getFullscreenElement() === fullscreenTarget) {
@@ -528,6 +564,9 @@ function toggleFullscreen() {
 if (fullscreenToggle) fullscreenToggle.addEventListener('click', toggleFullscreen);
 document.addEventListener('fullscreenchange', updateFullscreenButton);
 document.addEventListener('webkitfullscreenchange', updateFullscreenButton);
+window.addEventListener('orientationchange', function() {
+  if (isiOSDevice && isIOSVideoMode()) window.scrollTo(0, 0);
+});
 updateFullscreenButton();
 function pulseScore(el){ el.classList.remove('pulse'); void el.offsetWidth; el.classList.add('pulse'); }
 function renderSetHistory(sh) {
