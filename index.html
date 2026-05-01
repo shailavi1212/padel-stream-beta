@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>BEER SHEVA PADEL LEAGUE</title>
-<meta name="theme-color" content="#070E18">
+<meta name="theme-color" content="#070E18" id="themeColorMeta">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -72,29 +72,45 @@ body::before { content: ''; position: fixed; inset: 0; background: radial-gradie
   bottom: 24px;
   right: 24px;
 }
-body.ios-video-mode { overflow: hidden; }
+html.ios-video-mode, body.ios-video-mode { overflow: hidden; height: 100%; background: #000; }
+body.ios-video-mode { background: #000 !important; }
+body.ios-video-mode::before { display: none; }
 body.ios-video-mode .top-nav,
 body.ios-video-mode .sponsor-bar,
-body.ios-video-mode .broadcast-footer { display: none; }
+body.ios-video-mode .broadcast-footer { display: none !important; }
+body.ios-video-mode .page-section { display: none !important; }
 body.ios-video-mode #page-live {
+  display: flex !important;
   max-width: none;
   min-height: 100vh;
+  min-height: 100dvh;
   padding: 0;
+  margin: 0;
 }
 body.ios-video-mode .broadcast-container {
   min-height: 100vh;
+  min-height: 100dvh;
 }
 body.ios-video-mode .video-wrapper {
   position: fixed;
   inset: 0;
   width: 100vw;
+  width: 100svw;
   height: 100vh;
+  height: 100svh;
   height: 100dvh;
   max-width: none;
   aspect-ratio: auto;
   border: none;
   border-radius: 0;
-  z-index: 250;
+  background: #000;
+  z-index: 9999;
+}
+body.ios-video-mode .video-wrapper::before { display: none; }
+body.ios-video-mode .video-wrapper iframe {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 body.ios-video-mode .video-wrapper .fullscreen-toggle {
   right: calc(env(safe-area-inset-right, 0px) + 16px);
@@ -537,6 +553,7 @@ function updateStream(url) {
 }
 var fullscreenTarget = document.getElementById('videoWrapper');
 var fullscreenToggle = document.getElementById('fullscreenToggle');
+var themeColorMeta = document.getElementById('themeColorMeta');
 var isiOSDevice = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 function isIOSVideoMode() {
   return document.body.classList.contains('ios-video-mode');
@@ -552,12 +569,44 @@ function updateFullscreenButton() {
   }
   fullscreenToggle.textContent = getFullscreenElement() === fullscreenTarget ? 'צא ממסך מלא' : 'מסך מלא';
 }
+function tryLockLandscape() {
+  try {
+    if (screen.orientation && screen.orientation.lock) {
+      screen.orientation.lock('landscape').catch(function(){});
+    }
+  } catch(e){}
+}
+function tryUnlockOrientation() {
+  try {
+    if (screen.orientation && screen.orientation.unlock) screen.orientation.unlock();
+  } catch(e){}
+}
+function nudgeSafariChromeAway() {
+  // Repeatedly scroll to push Safari's address bar / toolbar to its minimal state
+  window.scrollTo(0, 0);
+  setTimeout(function(){ window.scrollTo(0, 1); window.scrollTo(0, 0); }, 50);
+  setTimeout(function(){ window.scrollTo(0, 1); window.scrollTo(0, 0); }, 250);
+  setTimeout(function(){ window.scrollTo(0, 1); window.scrollTo(0, 0); }, 600);
+}
+function enterIOSVideoMode() {
+  document.documentElement.classList.add('ios-video-mode');
+  document.body.classList.add('ios-video-mode');
+  if (themeColorMeta) themeColorMeta.setAttribute('content', '#000000');
+  tryLockLandscape();
+  nudgeSafariChromeAway();
+  updateFullscreenButton();
+}
+function exitIOSVideoMode() {
+  document.documentElement.classList.remove('ios-video-mode');
+  document.body.classList.remove('ios-video-mode');
+  if (themeColorMeta) themeColorMeta.setAttribute('content', '#070E18');
+  tryUnlockOrientation();
+  updateFullscreenButton();
+}
 function toggleFullscreen() {
   if (!fullscreenTarget) return;
   if (isiOSDevice) {
-    document.body.classList.toggle('ios-video-mode');
-    window.scrollTo(0, 0);
-    updateFullscreenButton();
+    if (isIOSVideoMode()) exitIOSVideoMode(); else enterIOSVideoMode();
     return;
   }
   if (getFullscreenElement() === fullscreenTarget) {
@@ -572,6 +621,9 @@ if (fullscreenToggle) fullscreenToggle.addEventListener('click', toggleFullscree
 document.addEventListener('fullscreenchange', updateFullscreenButton);
 document.addEventListener('webkitfullscreenchange', updateFullscreenButton);
 window.addEventListener('orientationchange', function() {
+  if (isiOSDevice && isIOSVideoMode()) nudgeSafariChromeAway();
+});
+window.addEventListener('resize', function() {
   if (isiOSDevice && isIOSVideoMode()) window.scrollTo(0, 0);
 });
 if ('serviceWorker' in navigator) {
